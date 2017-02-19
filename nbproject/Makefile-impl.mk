@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=CoordinateParser
+PROJECTNAME=coordinate_parser
 
 # Active Configuration
 DEFAULTCONF=Debug

@@ -9,16 +9,16 @@ CND_DISTDIR=dist
 # Debug configuration
 CND_PLATFORM_Debug=GNU-MacOSX
 CND_ARTIFACT_DIR_Debug=dist/Debug/GNU-MacOSX
-CND_ARTIFACT_NAME_Debug=coordinateparser
-CND_ARTIFACT_PATH_Debug=dist/Debug/GNU-MacOSX/coordinateparser
+CND_ARTIFACT_NAME_Debug=coordinate_parser
+CND_ARTIFACT_PATH_Debug=dist/Debug/GNU-MacOSX/coordinate_parser
 CND_PACKAGE_DIR_Debug=dist/Debug/GNU-MacOSX/package
 CND_PACKAGE_NAME_Debug=coordinateparser.tar
 CND_PACKAGE_PATH_Debug=dist/Debug/GNU-MacOSX/package/coordinateparser.tar
 # Release configuration
 CND_PLATFORM_Release=GNU-MacOSX
 CND_ARTIFACT_DIR_Release=dist/Release/GNU-MacOSX
-CND_ARTIFACT_NAME_Release=coordinateparser
-CND_ARTIFACT_PATH_Release=dist/Release/GNU-MacOSX/coordinateparser
+CND_ARTIFACT_NAME_Release=coordinate_parser
+CND_ARTIFACT_PATH_Release=dist/Release/GNU-MacOSX/coordinate_parser
 CND_PACKAGE_DIR_Release=dist/Release/GNU-MacOSX/package
 CND_PACKAGE_NAME_Release=coordinateparser.tar
 CND_PACKAGE_PATH_Release=dist/Release/GNU-MacOSX/package/coordinateparser.tar

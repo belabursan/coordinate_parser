@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 
+
 /* coordinate types */
 enum coord_type
 {
@@ -20,6 +21,7 @@ enum iso_type
 
 static gboolean coordinate_to_double (const gchar *coord, gdouble *result, gint coord_type);
 static gboolean validate_coordinate (gdouble d, gint coord_type);
+static gboolean get_iso_type (const gchar *coord, gint *iso_type, gint coord_type);
 /******************************************************************************/
 
 
@@ -33,7 +35,6 @@ gboolean
 longitude_coord2double (const gchar *coord, gdouble *result)
 {
   gdouble d;
-  *result = 0;
 
   if (coordinate_to_double (coord, &d, coord_type_longitude)) {
     if (validate_coordinate (d, coord_type_longitude)) {
@@ -55,7 +56,6 @@ gboolean
 latitude_coord2double (const gchar *coord, gdouble *result)
 {
   gdouble d;
-  *result = 0;
 
   if (coordinate_to_double (coord, &d, coord_type_latitude)) {
     if (validate_coordinate (d, coord_type_latitude)) {
@@ -90,8 +90,13 @@ coordinate_to_double (const gchar *coord, gdouble *result, gint coord_type)
   gdouble d_min = 0;
   gdouble d_sec = 0;
 
-  iso_type = iso_type_ddmmss; //get iso type here
+  *result = 0;
 
+  if (!get_iso_type (coord, &iso_type, coord_type)) {
+    return FALSE;
+  }
+
+  /* If type is dd just convert and return */
   if (iso_type == iso_type_dd) {
     return sscanf (coord, "%lg", result) > 0;
   } else {
@@ -104,16 +109,21 @@ coordinate_to_double (const gchar *coord, gdouble *result, gint coord_type)
     memset (deg, 0, 4);
     memset (min, 0, strlen (coord));
     index = 2 + coord_type + sign_len;
+
+    /* Parse degrees */
     memcpy (deg, coord, index);
     if (sscanf (deg, "%lg", &d_deg) < 1) {
       return FALSE;
     }
+
+    /* parse minutes (ddmm type) */
     if (iso_type == iso_type_ddmm) {
       memcpy (min, &coord[index], (strlen (coord) - index));
       if (sscanf (min, "%lg", &d_min) < 1) {
         return FALSE;
       }
     } else {
+      /* parse minutes and seconds (ddmmss type) */
       memset (sec, 0, strlen (coord));
       memcpy (min, &coord[index], 2);
       memcpy (sec, &coord[index + 2], (strlen (coord) - (index - 2)));
@@ -126,6 +136,7 @@ coordinate_to_double (const gchar *coord, gdouble *result, gint coord_type)
     }
   }
 
+  /* calculate the DecimaDegrees from degrees-minutes-seconds */
   *result = d_deg + (sign * (d_min / 60)) + (sign * (d_sec / 3600));
 
   return TRUE;
@@ -147,4 +158,20 @@ validate_coordinate (gdouble coord, gint coord_type)
     return TRUE;
   }
   return FALSE;
+}
+
+
+/**
+ * Evaluates the string and determines the iso type
+ * @param [in] coord coordinate to validate
+ * @param [out] iso_type iso type to set
+ * @param [in] coord_type type of the coordinate, see coord_type enum
+ * @return #TRUE if string represents a valid coordinate, #FALSE otherwise
+ */
+static gboolean
+get_iso_type (const gchar *coord, gint *iso_type, gint coord_type)
+{
+  //TODO: fix this later !!!
+  *iso_type = iso_type_ddmmss;
+  return TRUE;
 }
