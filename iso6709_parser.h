@@ -5,11 +5,11 @@
  * Created on February 18, 2017, 9:59 AM
  */
 #ifndef ISO6709_PARSER_H
-#define	ISO6709_PARSER_H
+#define ISO6709_PARSER_H
 
 #include <glib.h>
 
-#ifdef	__cplusplus
+#ifdef __cplusplus
 extern "C" {
 #endif
 
@@ -30,8 +30,8 @@ extern "C" {
      */
     gboolean latitude_coord2double(const gchar *coord, gdouble *result);
 
-#ifdef	__cplusplus
+#ifdef __cplusplus
 }
 #endif
 
-#endif	/* ISO6709_PARSER_H */
+#endif /* ISO6709_PARSER_H */
